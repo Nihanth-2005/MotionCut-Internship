@@ -1,36 +1,37 @@
 import random
 
-number = random.randint(1, 50)
-attempts = 10
+comp_input = random.randint(1, 50)
+rem_attempt = 10
 
-print("Guess the number between 1 and 50")
-
-for i in range(1, attempts + 1):
-    guess = int(input("Enter your guess: "))
-
-    if guess < 1 or guess > 50:
-        print("Input must be between 1 and 50.")
+for i in range(1, 11):
+    user_input = int(input("Try to guess the number between 1 to 50: "))
+    
+    if user_input > 50 or user_input < 1:
+        print("\n\nEntered input must be in between 1 to 50 !!")
+        exit(0)
+        
+    rem_attempt -= 1
+    
+    if user_input == comp_input:
+        print("\n\nHurray! You guessed it right in %d moves" % (i))
         break
-
-    if guess == number:
-        print(f"Hurray! You guessed it right in {i} attempts.")
-        break
-    elif guess > number:
-        if guess - number <= 3:
-            print("Almost there!")
-        elif guess - number <= 10:
-            print("High!")
-        else:
+        
+    if user_input > comp_input:
+        if (user_input - comp_input) > 10:
             print("Too high!")
-    else:
-        if number - guess <= 3:
-            print("Almost there!")
-        elif number - guess <= 10:
-            print("Low!")
-        else:
+        if (user_input - comp_input) < 10:
+            if (user_input - comp_input) < 3:
+                print("Almost there!")
+            else:
+                print("High!")
+                
+    if user_input < comp_input:
+        if (comp_input - user_input) > 10:
             print("Too low!")
-
-    print(f"Remaining attempts: {attempts - i}")
-
-if guess != number:
-    print(f"You lost! The number was {number}")
+        if (comp_input - user_input) < 10:
+            if (comp_input - user_input) < 3:
+                print("Almost there!")
+            else:
+                print("Low!")
+                
+    print("Remaining attempts :%d\n\n " % (rem_attempt))
